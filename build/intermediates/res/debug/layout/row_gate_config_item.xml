@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+	android:layout_margin="@dimen/dialog_fragment_margin"
+	android:columnCount="2"
+    android:orientation="horizontal" >
+    
+    
+			<TextView
+			    android:id="@+id/list_item_gate_role_name"
+			    android:hint="@string/data_placeholder"
+			    android:layout_columnSpan="2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_vertical|left"
+		        android:textSize="@dimen/dialog_fragment_font_size_medium"
+		        />
+			
+			<TextView
+			    android:text="@string/hint_gate_time_range_start"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:gravity="center_vertical|left"
+		        android:layout_marginRight="3dp"
+		        android:textSize="@dimen/dialog_fragment_font_size_small"
+		        />
+			
+			<TextView
+			    android:hint="@string/data_placeholder"
+			    android:id="@+id/list_item_gate_role_start_time"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:gravity="center_vertical|left"
+		        android:textSize="@dimen/dialog_fragment_font_size_small"
+		        />
+			
+			<TextView
+			    android:text="@string/hint_gate_time_range_end"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:gravity="center_vertical|left"
+		        android:layout_marginRight="3dp"
+		        android:textSize="@dimen/dialog_fragment_font_size_small"
+		        />
+			
+			<TextView
+			    android:hint="@string/data_placeholder"
+			    android:id="@+id/list_item_gate_role_stop_time"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_vertical|left"
+		        android:textSize="@dimen/dialog_fragment_font_size_small"
+		        />
+    
+
+</GridLayout><!-- From: file:/Users/andy/Documents/tmp/YC.Handheld.Prototyp/res/layout/row_gate_config_item.xml -->

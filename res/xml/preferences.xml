@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferencesScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    
+    <PreferenceCategory 
+        android:title="@string/preferences_category_service_title"
+        android:key="pref_service">
+        
+	    <EditTextPreference
+	        android:key="pref_service_url"
+	        android:title="@string/preferences_item_service_url"
+	        android:summary="@string/preferences_item_service_url_summary"
+	        android:defaultValue=""/>
+	    
+	    <EditTextPreference
+	        android:key="pref_service_name"
+	        android:title="@string/preferences_item_service_name"
+	        android:summary="@string/preferences_item_service_name_summary"
+	        android:defaultValue=""/>
+    
+    </PreferenceCategory>
+    
+	<PreferenceCategory 
+        android:title="@string/preferences_category_info_title"
+        android:key="pref_device">
+    
+		<EditTextPreference
+	        android:key="pref_device_ip"
+	        android:title="@string/preferences_item_device_ip"/>
+	        
+	    <EditTextPreference
+	        android:key="pref_device_memory"
+	        android:title="@string/preferences_item_device_memory"/>
+    
+    </PreferenceCategory>
+
+</PreferencesScreen>

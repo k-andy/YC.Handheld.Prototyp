@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.youchip.youmobile"
+    android:versionCode="30"
+    android:versionName="1.0.20" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.youchip.youmobile.controller.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.SelectActionActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.helpdesk.HelpDeskMainActivity"
+            android:label="@string/title_activity_help_desk_main" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.debug.DebugMainActivity"
+            android:label="@string/title_activity_debug_main" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.helpdesk.HelpDeskDetailsExtendedActivity"
+            android:label="@string/title_activity_help_desk_details" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.helpdesk.HelpDeskModifyActivity"
+            android:label="@string/title_activity_help_desk_edit" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.debug.DebugDetailsActivity"
+            android:label="@string/title_activity_debug_details"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.settings.ConfigChipLoadActivity"
+            android:label="@string/title_activity_settings_main" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.settings.ResetConfigActivity"
+            android:label="@string/title_activity_reset_config" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.gate.GateMainActivity"
+            android:label="@string/title_activity_gate_main" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.gate.GateAccessActivity"
+            android:label="@string/title_activity_gate_access" >
+        </activity>
+
+        <service
+            android:name="com.youchip.youmobile.controller.chipIO.ChipReaderService"
+            android:label="@string/title_service_chip_reader" >
+        </service>
+
+        <activity
+            android:name="com.youchip.youmobile.controller.shop.ShopMainActivity"
+            android:label="@string/title_activity_store_main" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.shop.ShopPayActivity"
+            android:label="@string/title_activity_store_main" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.ticket.SelectTicketActivity"
+            android:label="@string/title_activity_ticketcx_select_ticket" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.ticket.CheckTicketActivity"
+            android:label="@string/title_activity_check_ticket" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.report.ReportActivity"
+            android:label="@string/title_activity_report" >
+        </activity>
+    </application>
+
+</manifest>

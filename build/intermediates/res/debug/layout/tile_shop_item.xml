@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res/com.youchip.youmobile">
+    
+    <com.youchip.youmobile.view.shop.ShopItemTextView
+        android:id="@+id/list_element_shop_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/grid_selector_standard"
+        android:gravity="center_vertical|center_horizontal"
+        android:hint="@android:string/cancel"
+        android:maxLines="3"
+        android:maxWidth="90dp"
+        android:minLines="3"
+        android:minWidth="90dp"
+        app:quantity_bg_color="@color/shop_item_quantity_background"
+        app:quantity="0" />
+
+</LinearLayout>
+<!-- From: file:/Users/andy/Documents/tmp/YC.Handheld.Prototyp/res/layout/tile_shop_item.xml -->

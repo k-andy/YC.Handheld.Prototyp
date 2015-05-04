@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    tools:context=".MainActivity" >
+    
+	<TextView
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="1dp"
+	    android:layout_marginRight="5dp"
+	    android:layout_marginTop="2dp"
+	    android:text="@string/hint_gate_select"
+	    android:textSize="22sp" />
+	
+	<ListView
+        android:id="@+id/list_view_gate_config_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+	    
+</LinearLayout>
+<!-- From: file:/Users/andy/Documents/tmp/YC.Handheld.Prototyp/res/layout/activity_gate_main.xml -->

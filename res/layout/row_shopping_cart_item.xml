@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+	android:layout_marginTop="@dimen/dialog_fragment_margin"
+    android:orientation="horizontal" >
+    
+			<TextView
+			    android:id="@+id/list_item_shopping_cart_item_info"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="60"
+			    android:gravity="center_vertical|left"
+			    android:hint="@string/hint_shopping_cart_item_info"
+			    android:textSize="@dimen/dialog_fragment_font_size_tiny" />
+			
+			<TextView
+			    android:id="@+id/list_item_shopping_cart_quantity"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="20"
+			    android:gravity="center_vertical|right"
+			    android:hint="@string/hint_shop_total_qunatity"
+			    android:textSize="@dimen/dialog_fragment_font_size_tiny" />
+			
+			<TextView
+			    android:id="@+id/list_item_shopping_cart_total_price"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="20"
+			    android:gravity="center_vertical|right"
+			    android:hint="@string/hint_shop_total_price"
+			    android:textSize="@dimen/dialog_fragment_font_size_tiny" />
+
+</LinearLayout>

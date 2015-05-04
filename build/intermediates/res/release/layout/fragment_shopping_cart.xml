@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
+    
+    <ListView
+        android:id="@+id/list_view_shopping_cart"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop ="true"
+        android:layout_gravity="top">
+    </ListView>
+    
+    <LinearLayout
+        android:id="@+id/action_shopping_cart_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+ 
+        android:layout_alignParentBottom ="true"
+        android:gravity="bottom"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp" 
+        android:longClickable="false"
+        android:clickable="false"
+        android:focusable="false" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="75"
+                android:gravity="bottom|left"
+                android:text="@string/title_shop_total_price"
+                android:textSize="@dimen/dialog_fragment_font_size_small"
+                android:textStyle="bold" />
+            
+
+            
+            <TextView
+                android:id="@+id/list_item_shopping_cart_total_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:gravity="bottom|right"
+                android:hint="@string/hint_shop_total_price"
+                android:textSize="@dimen/dialog_fragment_font_size_small"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+</RelativeLayout>
+<!-- From: file:/Users/andy/Documents/tmp/YC.Handheld.Prototyp/res/layout/fragment_shopping_cart.xml -->

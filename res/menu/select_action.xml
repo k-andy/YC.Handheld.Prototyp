@@ -1,0 +1,42 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_log_off"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_secure"
+        android:title="@string/action_log_out"/>
+
+    <item
+        android:id="@+id/action_load_settings_from_server"
+        android:orderInCategory="105"
+        android:showAsAction="never"
+		android:icon="@drawable/ic_action_refresh"
+        android:title="@string/action_settings_refresh"/>
+
+    <item
+        android:id="@+id/action_info"
+        android:orderInCategory="110"
+        android:showAsAction="never"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="@string/action_info"/>
+
+
+    <item
+        android:id="@+id/action_start_debug"
+        android:orderInCategory="130"
+        android:showAsAction="never"
+        android:visible="false"
+        android:icon="@drawable/ic_action_secure"
+        android:title="@string/action_start_debug"/>
+
+    <item
+        android:id="@+id/action_force_logsync"
+        android:orderInCategory="140"
+        android:showAsAction="never"
+        android:visible="false"
+        android:icon="@drawable/ic_action_import_export"
+        android:title="@string/action_force_logsync"/>
+    
+    
+</menu>

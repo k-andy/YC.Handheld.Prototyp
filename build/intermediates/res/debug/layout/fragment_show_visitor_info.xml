@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".NameSearcherFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dialog_fragment_font_size_tiny"
+            android:text="@string/title_ticketxc_visitor_barcode" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:textSize="@dimen/dialog_fragment_font_size_tiny"
+            android:hint="@string/error_ticketxc_ticket_status_unknown" />
+
+        </LinearLayout>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/dialog_fragment_font_size_small"
+                android:text="@string/title_ticketxc_visitor_firstname" />
+
+            <EditText
+                android:id="@+id/ticketxc_visitor_check_firstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title_ticketxc_visitor_firstname"
+                android:textSize="@dimen/dialog_fragment_font_size_big"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/dialog_fragment_font_size_small"
+                android:text="@string/title_ticketxc_visitor_lastname" />
+
+            <EditText
+                android:id="@+id/ticketxc_visitor_check_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title_ticketxc_visitor_lastname"
+                android:textSize="@dimen/dialog_fragment_font_size_big"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/dialog_fragment_font_size_small"
+                android:text="@string/title_ticketxc_visitor_email" />
+
+            <EditText
+                android:id="@+id/ticketxc_visitor_check_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title_ticketxc_visitor_email"
+                android:textSize="@dimen/dialog_fragment_font_size_big"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/dialog_fragment_font_size_small"
+                android:text="@string/title_ticketxc_visitor_zipcode" />
+
+            <EditText
+                android:id="@+id/ticketxc_visitor_check_zipcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title_ticketxc_visitor_zipcode"
+                android:textSize="@dimen/dialog_fragment_font_size_big"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/dialog_fragment_font_size_small"
+                android:text="@string/title_ticketxc_visitor_vendor" />
+
+            <EditText
+                android:id="@+id/ticketxc_visitor_check_vendor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title_ticketxc_visitor_vendor"
+                android:textSize="@dimen/dialog_fragment_font_size_big"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+<!-- From: file:/Users/andy/Documents/tmp/YC.Handheld.Prototyp/res/layout/fragment_show_visitor_info.xml -->

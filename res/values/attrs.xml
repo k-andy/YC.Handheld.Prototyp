@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <declare-styleable name="ShopItemTextView">
+        <attr name="quantity" format="integer" />
+        <attr name="quantity_font_color" format="color" />
+        <attr name="quantity_font_scale" format="float" />
+        <attr name="quantity_bg_color" format="color" />
+        <attr name="quantity_bg_scale" format="float" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/hint_no_config_loaded"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hint_no_config_loaded"
+        />
+
+   <Button
+        android:id="@+id/action_start_gate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_start_gate" />
+
+    <Button
+        android:id="@+id/action_start_helpdesk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_start_helpdesk" />
+
+    <Button
+        android:id="@+id/action_start_shop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_start_shop" />
+    
+    <Button
+        android:id="@+id/action_start_cashpoint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_start_cashpoint" />
+
+    <Button
+        android:id="@+id/action_start_ticketxchange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_start_ticketexchange" />
+
+    <Button
+        android:id="@+id/action_start_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_start_see_report" />
+
+</LinearLayout>

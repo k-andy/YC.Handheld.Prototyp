@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dialog_fragment_margin"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dialog_fragment_font_size_big"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/hint_shop_request_price_selection" />
+
+    <RelativeLayout
+        
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dialog_fragment_margin" >
+
+        <NumberPicker
+            android:id="@+id/mainCurrencyUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="100dp" />
+
+        <TextView
+            android:id="@+id/currency_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/mainCurrencyUnit"
+            android:text="@string/hint_shop_currency_delimitter"
+            android:textSize="@dimen/dialog_fragment_font_size_big"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/mainCurrencyUnit" />
+
+        <NumberPicker
+            android:id="@+id/fractionalCurrencyUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/currency_dot" />
+
+        <TextView
+            android:id="@+id/currency_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/hint_shop_currency_symbol"
+            android:textSize="@dimen/dialog_fragment_font_size_big"
+            android:layout_toRightOf="@id/fractionalCurrencyUnit" />
+    </RelativeLayout>
+
+</LinearLayout>

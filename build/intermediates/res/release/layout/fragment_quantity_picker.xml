@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/dialog_fragment_margin"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/hint_shop_select_quantity"
+        android:textSize="@dimen/dialog_fragment_font_size_big" />
+
+    <TextView
+        android:id="@+id/shop_item_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:hint="@string/hint_shop_item_description"
+        android:textSize="@dimen/dialog_fragment_font_size_small" />
+
+    <NumberPicker
+        android:id="@+id/action_quantity_selection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dialog_fragment_margin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/hint_shop_total_price_title"
+        android:textSize="@dimen/dialog_fragment_font_size_small" />
+
+    <TextView
+        android:id="@+id/shop_item_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:hint="@string/hint_shop_total_price"
+        android:textSize="@dimen/dialog_fragment_font_size_small" />
+
+</LinearLayout><!-- From: file:/Users/andy/Documents/tmp/YC.Handheld.Prototyp/res/layout/fragment_quantity_picker.xml -->

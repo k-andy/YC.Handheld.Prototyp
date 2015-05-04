@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/andy/Documents/tmp/YC.Handheld.Prototyp/lib/RFIDScan.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="9ca77e35cbb4cfa1eabe02e07205037e47cb14cf">
+        <dex dex="/Users/andy/Documents/tmp/YC.Handheld.Prototyp/build/intermediates/pre-dexed/debug/RFIDScan-cbd8082e353b9ab87de8830889122e64ac4520fa.jar" />
+    </item>
+    <item
+        jar="/Users/andy/Documents/tmp/YC.Handheld.Prototyp/lib/rfidbarcode.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="45acb367603e85eb00ce6c053f1da3d0e4be31a6">
+        <dex dex="/Users/andy/Documents/tmp/YC.Handheld.Prototyp/build/intermediates/pre-dexed/debug/rfidbarcode-8f848363d97a762a1f5177f0faf83081c42d00fc.jar" />
+    </item>
+    <item
+        jar="/Users/andy/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v13/19.1.0/support-v13-19.1.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="6b852a232f642c75a7fdfc7212b841b8c8f8959c">
+        <dex dex="/Users/andy/Documents/tmp/YC.Handheld.Prototyp/build/intermediates/pre-dexed/debug/support-v13-19.1.0-bf2b34720329a9d7bd9c8c7bc6929f2682df8970.jar" />
+    </item>
+    <item
+        jar="/Users/andy/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="/Users/andy/Documents/tmp/YC.Handheld.Prototyp/build/intermediates/pre-dexed/debug/support-v4-19.1.0-4d1ba4193cdd4de44519be3d2b856cea06565621.jar" />
+    </item>
+    <item
+        jar="/Users/andy/Documents/tmp/YC.Handheld.Prototyp/libs/ksoap2-android-assembly-3.3.0-jar-with-dependencies.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="62681b8212ca52278feafec31775fd0cb096d99a">
+        <dex dex="/Users/andy/Documents/tmp/YC.Handheld.Prototyp/build/intermediates/pre-dexed/debug/ksoap2-android-assembly-3.3.0-jar-with-dependencies-e678c19b4c32e31347f6fa87c7ff24c550c7b741.jar" />
+    </item>
+
+</items>

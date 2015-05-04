@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ShopMainActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/shop_info_background"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/shop_item_select_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_shop_item_select_purchase" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/shop_item_grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:columnCount="3"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:horizontalSpacing="1dp"
+        android:listSelector="@drawable/list_selector"
+        android:numColumns="auto_fit"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/shop_info_background"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/shop_cancel_purchase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:background="@color/shop_cancel_purchase"
+            android:maxLines="2"
+            android:minLines="2"
+            android:text="@string/action_shop_cancel_purchase"
+            android:textColor="@color/shop_item_font_light" />
+
+        <GridLayout
+            android:id="@+id/action_shopping_cart_link"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="40"
+            android:columnCount="2"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:maxLines="1"
+                android:text="@string/title_shop_total_quantity" />
+
+            <TextView
+                android:id="@+id/shop_total_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="5dp"
+                android:hint="@string/hint_shop_total_qunatity"
+                android:maxLines="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:maxLines="1"
+                android:text="@string/title_shop_total_price" />
+
+            <TextView
+                android:id="@+id/shop_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="5dp"
+                android:hint="@string/hint_shop_total_price"
+                android:maxLines="1" />
+        </GridLayout>
+
+        <Button
+            android:id="@+id/shop_submit_purchase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:background="@color/shop_submit_purchase"
+            android:maxLines="2"
+            android:minLines="2"
+            android:text="@string/action_shop_submit_purchase"
+            android:textColor="@color/shop_item_font_light" />
+
+    </LinearLayout>
+
+</LinearLayout>

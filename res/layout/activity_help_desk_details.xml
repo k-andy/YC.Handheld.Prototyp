@@ -1,0 +1,144 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_settings_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".SettingsMainActivity" >
+    
+	<LinearLayout
+	android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+	<TextView
+    	android:id="@+id/helpdesk_caption_uid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="@string/hint_rfid_uid" />
+
+	<TextView
+	    android:id="@+id/helpdesk_text_uid"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingBottom="5dp"
+	    android:text="@string/hint_no_data"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+	
+    <TextView
+        android:id="@+id/helpdesk_caption_event_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="@string/hint_rfid_event_id" />
+    
+	<TextView
+	    android:id="@+id/helpdesk_text_event_id"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingBottom="5dp"
+	    android:text="@string/hint_no_data"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	
+    <TextView
+        android:id="@+id/helpdesk_caption_status_blocked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="@string/hint_rfid_status_blocked" />
+    
+	<TextView
+	    android:id="@+id/helpdesk_text_status_blocked"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingBottom="5dp"
+	    android:text="@string/hint_no_data"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	
+    <TextView
+        android:id="@+id/helpdesk_caption_visitor_role"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="@string/hint_rfid_visitor_role" />
+    
+	<TextView
+	    android:id="@+id/helpdesk_text_visitor_role"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingBottom="5dp"
+	    android:text="@string/hint_no_data"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+
+    <TextView
+        android:id="@+id/helpdesk_caption_area_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="@string/hint_rfid_area_id" />
+
+	<TextView
+	    android:id="@+id/helpdesk_text_area_id"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingBottom="5dp"
+	    android:text="@string/hint_no_data"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	<TextView
+        android:id="@+id/helpdesk_caption_area_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="@string/hint_rfid_area_time" />
+
+	<TextView
+	    android:id="@+id/rfid_area_time"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingBottom="5dp"
+	    android:hint="@string/hint_time"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+    
+    <TextView
+        android:id="@+id/helpdesk_caption_credit_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="@string/hint_rfid_credit_1" />
+
+	<TextView
+	    android:id="@+id/helpdesk_text_credit_1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingBottom="5dp"
+	    android:text="@string/hint_no_data"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+    
+    <TextView
+        android:id="@+id/helpdesk_caption_credit_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="@string/hint_rfid_credit_2" />
+    
+	<TextView
+	    android:id="@+id/helpdesk_text_credit_2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingBottom="5dp"
+	    android:text="@string/hint_no_data"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+    </LinearLayout>
+</ScrollView>

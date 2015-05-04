@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_show_balance_check"
+        android:orderInCategory="90"
+        android:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="@string/action_show_balance_check"/>
+
+    <item
+        android:id="@+id/action_show_shopping_cart"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_storage"
+        android:title="@string/action_show_shopping_cart"/>
+    
+	<item
+        android:id="@+id/action_toggle_cancellation_mode"
+        android:orderInCategory="110"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_remove"
+        android:title="@string/action_change_shopping_mode"
+        android:checkable="true"/>
+
+
+
+
+</menu>
