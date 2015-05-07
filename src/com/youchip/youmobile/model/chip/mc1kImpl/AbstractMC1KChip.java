@@ -479,20 +479,6 @@ public abstract class AbstractMC1KChip implements Chip {
                 byte calcCRC = calcByteCRC(uidCRC, data, ChipField.crc);
                 byte blckCRC = data[ChipField.crc];
 
-//                Log.e("TEST", "------------------");
-//                    Log.e("TEST", "block = " + block);
-//                for (byte b : data) {
-//                    Log.e("TEST", "data = " + b);
-//
-//                }
-//
-//                Log.e("TEST", "------------------");
-                Log.e("TEST", "block = " + block);
-                Log.e("TEST", "blckCRC = " + blckCRC);
-                Log.e("TEST", "calcCRC = " + calcCRC);
-
-                Log.e("TEST", "uidCRC = " + uidCRC);
-
                 if (blckCRC != calcCRC) {
                     String val1 = String.format("%02X", DataConverter.uByteToInt(blckCRC));
                     String val2 = String.format("%02X", DataConverter.uByteToInt(calcCRC));

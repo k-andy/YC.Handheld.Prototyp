@@ -256,17 +256,18 @@
     <string name="report_total_w_taxes">Total Sales w. taxes</string>
     <string name="report_total_net">Total Sales net</string>
     <string name="report_gross_sales">Gross Sales</string>
-    <string name="report_taxes_title">Taxes</string>
-    <string name="report_taxes_separator">-----</string>
-    <string name="report_taxes_total_label">Total</string>
-    <string name="report_taxes_total_excl">excl.</string>
+    <string name="report_returns">Total Returns</string>
+    <string name="report_taxes_title">Taxes:</string>
+    <string name="report_taxes_taxes_label">Taxes</string>
+    <string name="report_taxes_sales_incl_label">Sales incl. tax</string>
+    <string name="report_taxes_sales_net_label">Sales net.</string>
     <string name="report_taxes_percent">%</string>
     <string name="report_taxes_vat_label">VAT</string>
-    <string name="report_taxes_total_incl">incl.</string>
-    <string name="report_taxes_without_tax">Without tax</string>
+    <string name="report_details_sold_label">Sold items:</string>
+    <string name="report_details_canceled_label">Canceled items:</string>
     <string name="reportClearBtn">Clear</string>
-    <string name="title_activity_test_uid">TestUID</string>
+    <string name="reportDetailsBtn">Details</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_report_details">ReportDetails</string>
 
 </resources>

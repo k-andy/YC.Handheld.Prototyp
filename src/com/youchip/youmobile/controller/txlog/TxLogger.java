@@ -1,20 +1,17 @@
 package com.youchip.youmobile.controller.txlog;
 
-import static com.youchip.youmobile.controller.txlog.TxLogger.LogLevel.*;
-import static com.youchip.youmobile.controller.txlog.TxType.*;
-import static com.youchip.youmobile.controller.shop.PaymentMethod.*;
-import static com.youchip.youmobile.utils.DataConverter.javaDateToServiceFormat;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
-
-
 import android.util.Log;
 
 import com.youchip.youmobile.controller.settings.ConfigAccess;
-import com.youchip.youmobile.controller.txlog.TxGateLogger.AccessState;
 import com.youchip.youmobile.controller.shop.PaymentMethod;
+import com.youchip.youmobile.controller.txlog.TxGateLogger.AccessState;
+import com.youchip.youmobile.utils.DataConverter;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -22,7 +19,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import com.youchip.youmobile.utils.DataConverter;
+import static com.youchip.youmobile.controller.shop.PaymentMethod.PAYMENT_NONE;
+import static com.youchip.youmobile.controller.txlog.TxLogger.LogLevel.ALL;
+import static com.youchip.youmobile.controller.txlog.TxLogger.LogLevel.CRITICAL;
+import static com.youchip.youmobile.controller.txlog.TxLogger.LogLevel.INFO;
+import static com.youchip.youmobile.controller.txlog.TxType.AREA_CHANGE;
+import static com.youchip.youmobile.controller.txlog.TxType.CFG_READ;
+import static com.youchip.youmobile.controller.txlog.TxType.DEBUG;
+import static com.youchip.youmobile.controller.txlog.TxType.NO_TX_LOG;
+import static com.youchip.youmobile.controller.txlog.TxType.STATUS;
+import static com.youchip.youmobile.utils.DataConverter.javaDateToServiceFormat;
 
 public class TxLogger {
     
@@ -39,7 +45,6 @@ public class TxLogger {
 
     private final String LOG_TAG;
 
-    
     /**
      * creates a new TX logger instance
      * @param context
@@ -75,7 +80,14 @@ public class TxLogger {
                 return false;
             }
     }
-    
+
+    protected void reportLogRotate(Activity activity) {
+        try {
+            androidLogger.writeExternalReportLog(activity);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static File renameFile(Context context, File from){
         String filename = getLogFileName(context); 

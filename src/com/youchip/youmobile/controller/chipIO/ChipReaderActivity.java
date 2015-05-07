@@ -9,7 +9,6 @@ import android.os.PowerManager;
 import android.util.Log;
 import android.widget.Button;
 
-import com.android.RfidControll;
 import com.youchip.youmobile.R;
 import com.youchip.youmobile.controller.AbstractAppControlActivity;
 import com.youchip.youmobile.controller.settings.ConfigAccess;
@@ -31,8 +30,6 @@ import static com.youchip.youmobile.controller.chipIO.ChipReaderService.RESULT_N
 import static com.youchip.youmobile.controller.chipIO.ChipReaderService.ServiceIOMode.MODE_DISABLE;
 import static com.youchip.youmobile.controller.chipIO.ChipReaderService.ServiceIOMode.MODE_READ;
 import static com.youchip.youmobile.controller.chipIO.ChipReaderService.ServiceIOMode.MODE_WRITE;
-import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KChipSpecs.Structure.BYTES_PER_BLOCK;
-import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KChipSpecs.FactoryFields.UID;
 
 public abstract class ChipReaderActivity extends AbstractAppControlActivity {
     
@@ -195,42 +192,13 @@ public abstract class ChipReaderActivity extends AbstractAppControlActivity {
         //reset gui
         stateIndicator.setBackgroundColor(requestChipBackGroundColor);
         stateIndicator.setText(requestChipMessage);
-//        getChipUID();
+
         if (checkAppState()) {
             enableChipReadService();
         } else {
             showDisableMessage();
             disableApp();
         }
-    }
-
-    private void getChipUID() {
-        RfidControll rfidControll = new RfidControll();
-        rfidControll.API_OpenComm();
-
-        byte[] serialNumberAndKeyA = { (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
-                (byte) 0xFF, (byte) 0xFF };
-        byte[] dataToRead = new byte[BYTES_PER_BLOCK.getValue()];
-
-        int res = rfidControll.API_MF_Read(0x00, 0x01, 1, 1, serialNumberAndKeyA, dataToRead);
-
-        String result = toHexString(dataToRead, UID.getSize());
-        Log.e("TEST", "result = " + result);
-    }
-
-    private String toHexString(byte[] byteArray, int size) {
-        if (byteArray == null || byteArray.length < 1)
-            throw new IllegalArgumentException(
-                    "this byteArray must not be null or empty");
-        final StringBuilder hexString = new StringBuilder(2 * size);
-        for (int i = 0; i < size; i++) {
-            if ((byteArray[i] & 0xff) < 0x10)//
-                hexString.append("0");
-            hexString.append(Integer.toHexString(0xFF & byteArray[i]));
-            if (i != (byteArray.length - 1))
-                hexString.append("");
-        }
-        return hexString.toString().toUpperCase();
     }
 
     @Override

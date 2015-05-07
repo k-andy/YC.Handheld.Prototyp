@@ -1,6 +1,7 @@
 package com.youchip.youmobile.controller.settings;
 
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import com.youchip.youmobile.model.gate.BlockedChip;
 import com.youchip.youmobile.model.gate.VisitorRole;
 import com.youchip.youmobile.model.shop.ShopItemConfig;
 import com.youchip.youmobile.model.shop.VoucherInfo;
+import com.youchip.youmobile.utils.ReportLogUtils;
 import com.youchip.youmobile.utils.SystemInfo;
 
 import java.io.File;
@@ -66,7 +68,6 @@ public class ConfigAccess extends Application {
     private static final String ARTICLE_CONFIG_FILE = "article.cfg";
     private static final String GROUP_CONFIG_FILE = "group.cfg";
     private static final String LOG_MAIN_FILE = "yc.activitiy.log";
-    private static final String REPORT_LOG_MAIN_FILE = "yc.activitiy.reportlog";
 
     private static final String CONFIG_SERVICE_HOST = "service_host";
     private static final String CONFIG_SERVICE_NAME = "service_name";
@@ -400,10 +401,6 @@ public class ConfigAccess extends Application {
         return LOG_MAIN_FILE;
     }
 
-    public static String getReportLogMainFile() {
-        return REPORT_LOG_MAIN_FILE;
-    }
-
     public static void storeServiceURL(Context context, String host, String name) {
         SharedPreferences settings = getSettings(context);
 
@@ -682,8 +679,7 @@ public class ConfigAccess extends Application {
         }
     }
 
-    public static void reset(Context context){
-
+    public static void reset(Context context, Activity activity){
         // Clear Article/Shop Config
         context.deleteFile(ARTICLE_CONFIG_FILE);
 
@@ -695,6 +691,9 @@ public class ConfigAccess extends Application {
 
         // Clear Gate Config
         context.deleteFile(GATE_CONFIG_FILE);
+
+        //Clear report log
+        ReportLogUtils.resetReport(activity);
 
         // clear shared preferences
         SharedPreferences settings = context.getSharedPreferences(BASE_CONFIG_FILE, Context.MODE_PRIVATE);

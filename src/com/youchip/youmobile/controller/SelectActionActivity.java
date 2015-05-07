@@ -1,12 +1,23 @@
 package com.youchip.youmobile.controller;
 
-import static com.youchip.youmobile.controller.settings.ConfigChipLoadActivity.INTENT_REQUEST_CONFIG_CHIP_LOAD;
+import android.content.Context;
+import android.content.Intent;
+import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.youchip.youmobile.controller.report.ReportActivity;
+import com.youchip.youmobile.R;
 import com.youchip.youmobile.controller.gate.GateMainActivity;
 import com.youchip.youmobile.controller.helpdesk.HelpDeskMainActivity;
 import com.youchip.youmobile.controller.network.ChainConfigServiceCaller;
 import com.youchip.youmobile.controller.network.LogSyncForcer;
+import com.youchip.youmobile.controller.report.ReportActivity;
 import com.youchip.youmobile.controller.settings.ConfigAccess;
 import com.youchip.youmobile.controller.settings.ConfigChipLoadActivity;
 import com.youchip.youmobile.controller.settings.SettingsInfoBox;
@@ -16,21 +27,13 @@ import com.youchip.youmobile.controller.txlog.TxLogger;
 import com.youchip.youmobile.utils.AlertBox;
 import com.youchip.youmobile.utils.NetWorkInfo;
 
-import static com.youchip.youmobile.controller.IntentExtrasKeys.*;
-
-import com.youchip.youmobile.R;
-
-import android.content.Context;
-import android.net.wifi.WifiManager;
-import android.os.Bundle;
-import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_BO_ROLE_ADMIN;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_BO_ROLE_EMPLOYEE;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_BO_ROLE_SUPERVISOR;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_KEY_A;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_UID;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_USER_ID;
+import static com.youchip.youmobile.controller.settings.ConfigChipLoadActivity.INTENT_REQUEST_CONFIG_CHIP_LOAD;
 
 public class SelectActionActivity extends AbstractAppControlActivity {
     private boolean isBoAdmin = false;
@@ -133,7 +136,7 @@ public class SelectActionActivity extends AbstractAppControlActivity {
         seeReport  = ((Button) findViewById(R.id.action_start_report));
         noConfigHint    = ((TextView) findViewById(R.id.hint_no_config_loaded));
 
-        seeReport.setVisibility(View.INVISIBLE);
+        seeReport.setVisibility(View.GONE);
 
         Intent intent = getIntent();
 

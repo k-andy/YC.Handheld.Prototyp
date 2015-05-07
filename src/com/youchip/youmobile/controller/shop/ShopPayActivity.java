@@ -1,14 +1,5 @@
 package com.youchip.youmobile.controller.shop;
 
-import static com.youchip.youmobile.controller.IntentExtrasKeys.*;
-import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KChipSpecs.FactoryFields.*;
-import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KVisitorChipField.*;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,10 +18,37 @@ import com.youchip.youmobile.model.chip.interfaces.VisitorChip;
 import com.youchip.youmobile.model.chip.mc1kImpl.MC1KChipSpecs.AppType;
 import com.youchip.youmobile.model.chip.mc1kImpl.MC1KVisitorChip;
 import com.youchip.youmobile.model.gate.BlockedChip;
-import com.youchip.youmobile.model.shop.ShoppingCartItem;
+import com.youchip.youmobile.model.shop.ShopItemForReport;
 import com.youchip.youmobile.model.shop.ShoppingCart;
+import com.youchip.youmobile.model.shop.ShoppingCartItem;
 import com.youchip.youmobile.model.shop.VoucherInfo;
 import com.youchip.youmobile.utils.DataConverter;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_FIELD_CREDIT1;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_FIELD_CREDIT2;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_FIELD_OLD_CREDIT1;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_FIELD_OLD_CREDIT2;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_MAX_CASHOUT;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_MAX_CREDIT_1;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_MAX_CREDIT_2;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_USED_VOUCHER;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_EVENT_ID;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_SHOPPING_CART;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_SHOP_ERROR_ID;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_SHOP_PAYMENT_METHOD;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_SHOP_USE_VOUCHER;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_USER_ID;
+import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KChipSpecs.FactoryFields.APPTYPE;
+import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KChipSpecs.FactoryFields.EVENT_ID;
+import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KChipSpecs.FactoryFields.UID;
+import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KVisitorChipField.CREDIT_1;
+import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KVisitorChipField.CREDIT_2;
+import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KVisitorChipField.VOUCHER;
 
 
 public class ShopPayActivity extends ChipReaderActivity{
@@ -312,12 +330,12 @@ public class ShopPayActivity extends ChipReaderActivity{
                 Log.d(LOG_TAG, "Trade accepted for item " + plu);
                 // log entry for voucher payment
                 if (modVoucher > 0) {
-                    txLogger.addToTempLog(txType, chip.getUID(), 0, 0, neededVoucher, paymentMethod, plu, modVoucher);
+                    txLogger.addToTempLog(txType, chip.getUID(), 0, 0, neededVoucher, paymentMethod, plu, modVoucher, item.getVat(), item.getTitle(), item.getPrice());
                     totalVoucherUsed += modVoucher;
                 }
                 // log entry for non-voucher payment
                 if (quantity > modVoucher) {
-                    txLogger.addToTempLog(txType, chip.getUID(), txCredit1, txCredit2, 0, paymentMethod, plu, quantity - modVoucher);
+                    txLogger.addToTempLog(txType, chip.getUID(), txCredit1, txCredit2, 0, paymentMethod, plu, quantity - modVoucher, item.getVat(), item.getTitle(), item.getPrice());
                 }
             }
         }
@@ -332,7 +350,8 @@ public class ShopPayActivity extends ChipReaderActivity{
             
             if (ChipReaderService.writeDataToChip(chip)){
                 Log.d(LOG_TAG, "Trade was successful with chip " + chip.getUID());
-                txLogger.saveLog();
+                ShopItemForReport.saveTmpData();
+                txLogger.saveLog(this);
                 // clear log file
                 txLogger.clearLog();
 
@@ -345,6 +364,7 @@ public class ShopPayActivity extends ChipReaderActivity{
         }
         
         // TODO save error messages?
+        ShopItemForReport.clearTmpData();
         txLogger.clearLog();
         return false;
     }

@@ -274,7 +274,7 @@ public class MainActivity extends ChipReaderActivity {
 
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    ConfigAccess.reset(MainActivity.this);
+                                    ConfigAccess.reset(MainActivity.this, MainActivity.this);
 
                                     Intent intentBL = new Intent(BLACKLIST_UPDATED_INTENT);
                                     MainActivity.this.sendBroadcast(intentBL);

@@ -1,33 +1,25 @@
 package com.youchip.youmobile.controller.report;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.youchip.youmobile.R;
+import com.youchip.youmobile.ReportDetails;
+import com.youchip.youmobile.model.shop.ShopItemForReport;
 import com.youchip.youmobile.utils.ReportLogUtils;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 
 
 public class ReportActivity extends Activity {
-
-    private static final String REPORT_TOTAL_SALES_VALUE = "reportTotalSalesValue";
-    private static final String REPORT_TOTAL_SALES_WTAX_VALUE = "reportTotalSalesWTaxValue";
-    private static final String REPORT_TOTAL_SALES_NET_VALUE = "reportTotalSalesNetValue";
-    private static final String REPORT_GROSS_VALUE = "reportGrossValue";
-    private static final String REPORT_TAX_TOTAL_EXCL_PERCENT = "reportTaxTotalExclPercent";
-    private static final String REPORT_TAX_TOTAL_EXCL_VALUE = "reportTaxTotalExclValue";
-    private static final String REPORT_TAX_VAT_PERCENT = "reportTaxVatPercent";
-    private static final String REPORT_TAX_VAT_VALUE = "reportTaxVatValue";
-    private static final String REPORT_TAX_TOTAL_INCL_PERCENT = "reportTaxTotalInclPercent";
-    private static final String REPORT_TAX_TOTAL_INCL_VALUE = "reportTaxTotalInclValue";
-    private static final String REPORT_TAXES_WTTAX = "reportTaxesWtTax";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +51,8 @@ public class ReportActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void clearFile(View view) {
-        ReportLogUtils.clearFile(this);
-
+    public void resetReport(View view) {
+        ReportLogUtils.resetReport(this);
         updateReportView();
     }
 
@@ -70,59 +61,54 @@ public class ReportActivity extends Activity {
         TextView reportTotalSalesWTaxValue = ((TextView) findViewById(R.id.reportTotalSalesWTaxValue));
         TextView reportTotalSalesNetValue = ((TextView) findViewById(R.id.reportTotalSalesNetValue));
         TextView reportGrossValue = ((TextView) findViewById(R.id.reportGrossValue));
-        TextView reportTaxTotalExclPercent = ((TextView) findViewById(R.id.reportTaxTotalExclPercent));
-        TextView reportTaxTotalExclValue = ((TextView) findViewById(R.id.reportTaxTotalExclValue));
-        TextView reportTaxVatPercent = ((TextView) findViewById(R.id.reportTaxVatPercent));
-        TextView reportTaxVatValue = ((TextView) findViewById(R.id.reportTaxVatValue));
-        TextView reportTaxTotalInclPercent = ((TextView) findViewById(R.id.reportTaxTotalInclPercent));
-        TextView reportTaxTotalInclValue = ((TextView) findViewById(R.id.reportTaxTotalInclValue));
-        TextView reportTaxesWtTax = ((TextView) findViewById(R.id.reportTaxesWtTax));
+        TextView reportReturnsValue = ((TextView) findViewById(R.id.reportReturnsValue));
 
-        RelativeLayout relativeLayout = ((RelativeLayout) findViewById(R.id.taxReportWrapper));
-        relativeLayout.setVisibility(View.INVISIBLE);
+        LinearLayout taxesList = (LinearLayout) findViewById(R.id.taxesList);
+        taxesList.setVisibility(View.GONE);
+        Button reportDetailsBtn = (Button) findViewById(R.id.reportDetailsBtn);
+        reportDetailsBtn.setVisibility(View.GONE);
+        Button reportClearBtn = (Button) findViewById(R.id.reportClearBtn);
+        reportClearBtn.setVisibility(View.GONE);
 
-        String[] strings = null;
-        try {
-            strings = ReportLogUtils.readFile(this);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (ShopItemForReport.getPluAmount().isEmpty() && ShopItemForReport.getPluAmountCanceled().isEmpty()) {
+            ReportLogUtils.loadReport(this);
+        }
+
+        TaxListAdapter adapter = new TaxListAdapter(this, ReportLogUtils.calculateValuesForVats());
+        ListView lv = (ListView) findViewById(R.id.list);
+        lv.setAdapter(adapter);
+
+        double totalSales, totalSalesWTax, totalSalesNet, totalSalesGross, totalReturns;
+        long total = ReportLogUtils.calculateTotal();
+
+        totalSales = total / 100d;
+        totalSalesWTax = total / 100d;
+        totalSalesNet = ReportLogUtils.calculateNet() / 100d;
+        totalSalesGross = ReportLogUtils.calculateGross() / 100d;
+        totalReturns = ReportLogUtils.calculateReturns() / 100d;
+
+        if (!ShopItemForReport.getPluAmount().isEmpty()) {
+            taxesList.setVisibility(View.VISIBLE);
+            reportDetailsBtn.setVisibility(View.VISIBLE);
+            reportClearBtn.setVisibility(View.VISIBLE);
+        }
+        if (!ShopItemForReport.getPluAmountCanceled().isEmpty()) {
+            reportDetailsBtn.setVisibility(View.VISIBLE);
+            reportClearBtn.setVisibility(View.VISIBLE);
         }
 
         DecimalFormat myFormatter = new DecimalFormat("0.00");
-
-        double totalSales, totalSalesWTax, totalSalesNet, totalSalesGross, taxExcl, vat, taxIncl, wtTax;
-
-        if (strings == null) {
-            totalSales = 0;
-            totalSalesWTax = 0;
-            totalSalesNet = 0;
-            totalSalesGross = 0;
-            taxExcl = 0;
-            vat = 0;
-            taxIncl = 0;
-            wtTax = 0;
-        } else {
-            totalSales = Long.parseLong(strings[0].replaceAll("[^0-9]", "")) / 100.0;
-            totalSalesWTax = Long.parseLong(strings[1].replaceAll("[^0-9]", "")) / 100.0;
-            totalSalesNet = Long.parseLong(strings[2].replaceAll("[^0-9]", "")) / 100.0;
-            totalSalesGross = Long.parseLong(strings[3].replaceAll("[^0-9]", "")) / 100.0;
-            taxExcl = Long.parseLong(strings[4].replaceAll("[^0-9]", "")) / 100.0;
-            vat = Long.parseLong(strings[5].replaceAll("[^0-9]", "")) / 100.0;
-            taxIncl = Long.parseLong(strings[6].replaceAll("[^0-9]", "")) / 100.0;
-            wtTax = Long.parseLong(strings[7].replaceAll("[^0-9]", "")) / 100.0;
-        }
-
 
         reportTotalSalesValue.setText(myFormatter.format(totalSales) + "");
         reportTotalSalesWTaxValue.setText(myFormatter.format(totalSalesWTax) + "");
         reportTotalSalesNetValue.setText(myFormatter.format(totalSalesNet) + "");
         reportGrossValue.setText(myFormatter.format(totalSalesGross) + "");
-        reportTaxTotalExclPercent.setText("00");
-        reportTaxTotalExclValue.setText(myFormatter.format(taxExcl) + "");
-        reportTaxVatPercent.setText("00");
-        reportTaxVatValue.setText(myFormatter.format(vat) + "");
-        reportTaxTotalInclPercent.setText("00");
-        reportTaxTotalInclValue.setText(myFormatter.format(taxIncl) + "");
-        reportTaxesWtTax.setText(myFormatter.format(wtTax) + "");
+        reportReturnsValue.setText(myFormatter.format(totalReturns) + "");
     }
+
+    public void showReportDetails(View view) {
+        Intent intent = new Intent(this, ReportDetails.class);
+        startActivity(intent);
+    }
+
 }

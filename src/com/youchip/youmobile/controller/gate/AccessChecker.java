@@ -45,7 +45,6 @@ public class AccessChecker {
 
      for (AccessResult result : results) {
          if (result.getAccessState() == AccessState.BLOCKED || result.getAccessState() == AccessState.BANNED) {
-             Log.e("TEST", "access = " + result.getAccessMessage());
              accessResult = false;
              Log.w(CURRENT_CLASS, result.getAccessMessage());
          }

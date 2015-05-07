@@ -23,8 +23,6 @@ import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KChipSpecs.FactoryFie
 import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KChipSpecs.Security.DEFAULT_KEY_A;
 import static com.youchip.youmobile.model.chip.mc1kImpl.MC1KChipSpecs.Structure.BYTES_PER_BLOCK;
 
-//import com.iData.RfidControll;
-
 public class MC1KChipIO implements ChipIO {
 
     private static final int BLOCKS_PER_READ = 1;
@@ -97,6 +95,9 @@ public class MC1KChipIO implements ChipIO {
     public <T extends Chip> T readDataFromChipByBlockNumber(T chipData,
                                                             Set<Integer> blocksToRead) throws RfidReadException, RfidSecurityException {
 
+        String prevUID = "";
+        String curUID = "";
+
         byte[] rawBlock = new byte[BYTES_PER_BLOCK.getValue() * 2];
         byte[] rawBlockFinal;
         byte[] serialNumberAndKeyA;
@@ -106,11 +107,23 @@ public class MC1KChipIO implements ChipIO {
         int total = blocksToRead.size() - 1;
         int step = 0;
         if (blocksToRead.contains(0)) total--;
+        int counter = 0;
 
         for (Integer block : blocksToRead) {
             // if block is the factory info block, or the metadata block, ignore it
             if ((block == 0) || (block % 4 == 3)) {
                 continue;
+            }
+            counter++;
+            if (counter == 1) {
+                prevUID = readChipUID();
+            } else if (counter == 2) {
+                curUID = readChipUID();
+            }
+
+            if (counter == 2 && !prevUID.equals(curUID)) {
+                informReadListener(total, -1);
+                throw new RfidReadException();
             }
 
             serialNumberAndKeyA = this.getKeyA();
@@ -123,6 +136,7 @@ public class MC1KChipIO implements ChipIO {
             rawBlockFinal = Arrays.copyOfRange(rawBlock, 4, 16 + 4);
 
             if (checkIOOperation(result, serialNumberFinal)) {
+
                 chipData.setRawBlock(rawBlockFinal, block);
                 informReadListener(total, step++);
             } else {
@@ -133,18 +147,8 @@ public class MC1KChipIO implements ChipIO {
 
         chipData.setRawBlock(serialNumberFinal, UID.getBlock1Pos());
         chipData.resetChangedBlocks();
+
         return chipData;
-    }
-
-    private byte[] getChipUID() {
-        byte[] serialNumberAndKeyA = {(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
-                (byte) 0xFF, (byte) 0xFF};
-        byte[] dataToRead = new byte[BYTES_PER_BLOCK.getValue()];
-
-        rfidControll.API_MF_Read(this.getDeviceAddress(),
-                this.getAccessMode().getValue(), 1, 1, serialNumberAndKeyA, dataToRead);
-
-        return Arrays.copyOf(dataToRead, this.getKeyA().length);
     }
 
     private boolean checkIOOperation(int result, byte[] serialNumber) {
@@ -160,7 +164,7 @@ public class MC1KChipIO implements ChipIO {
             // serial number is 0
             Log.d(CURRENT_CLASS, "Chip IO operation failed: Serial Number is 0000 0000");
             return false;
-        } else if (checkIfItsNotDefaultChip()) {
+        } else if (checkIfItsNotDefaultChip()) {// || !DataConverter.byteArrayToHexString(serialNumber).equals(readChipUID())
             Log.d(CURRENT_CLASS, "Chip IO operation failed: default virtual chip");
             return false;
         } else {
@@ -170,7 +174,7 @@ public class MC1KChipIO implements ChipIO {
     }
 
     private boolean checkIfItsNotDefaultChip() {
-        if (DataConverter.byteArrayToHexString(getChipUID()).contains("8380BB00"))
+        if (readChipUID().contains("8380BB00") || readChipUID().contains("8487BB00"))
             return true;
         return false;
     }
@@ -285,7 +289,6 @@ public class MC1KChipIO implements ChipIO {
 
         // writing blocks to chip
         Iterator<Integer> it = blocksToUpdate.iterator();
-                Log.e("TEST", "---- BEGINNING ----");
         while (it.hasNext()) {
             int blockPos = it.next();
             if ((blockPos == 0) || (blockPos % 4 == 3)) {
@@ -296,18 +299,10 @@ public class MC1KChipIO implements ChipIO {
 
             dataToWrite = chipData.getRawBlock(blockPos);
 
-            for (byte b : dataToWrite) {
-                Log.e("TEST", "dataToWrite = " + b);
-            }
-
             int result = rfidControll
                     .API_MF_Write(this.getDeviceAddress(), this.getAccessMode()
                                     .getValue(), blockPos, BLOCKS_PER_READ,
                             serialNumberAndKeyA, dataToWrite);
-
-            for (byte b : serialNumberAndKeyA) {
-                Log.e("TEST", "serialNumberAndKeyA = " + b);
-            }
 
             if ((result > 0)) {
                 informWriteListener(total, -1);
@@ -318,15 +313,9 @@ public class MC1KChipIO implements ChipIO {
             it.remove();
         }
 
-        String s = DataConverter.byteArrayToHexString(serialNumberAndKeyA, 4);
+        String chipUID = DataConverter.byteArrayToHexString(serialNumberAndKeyA, 4);
 
-        for (byte b : serialNumberAndKeyA) {
-            Log.e("TEST", "serialNumberAndKeyA last = " + b);
-        }
-            Log.e("TEST", "serialNumberAndKeyA as string = " + s);
-        Log.e("TEST", "---- AFTER ----");
-
-        return s;
+        return chipUID;
     }
 
     /**
@@ -334,6 +323,7 @@ public class MC1KChipIO implements ChipIO {
      *
      * @return uid as string
      */
+
     private String readChipUID() {
         byte[] serialNumberAndKeyA = this.getKeyA();
         byte[] dataToRead = new byte[BYTES_PER_BLOCK.getValue()];
@@ -342,7 +332,7 @@ public class MC1KChipIO implements ChipIO {
                 this.getAccessMode().getValue(), 1, 1,
                 serialNumberAndKeyA, dataToRead);
 
-        return DataConverter.byteArrayToHexString(serialNumberAndKeyA, UID.getSize());
+        return DataConverter.byteArrayToHexString(dataToRead, UID.getSize());
     }
 
     /**

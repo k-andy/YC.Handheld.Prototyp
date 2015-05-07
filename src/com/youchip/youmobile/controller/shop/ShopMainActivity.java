@@ -1,38 +1,12 @@
 package com.youchip.youmobile.controller.shop;
 
-import static com.youchip.youmobile.controller.IntentExtrasKeys.*;
-
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Map;
-
-import com.youchip.youmobile.R;
-import com.youchip.youmobile.controller.AbstractAppControlActivity;
-import com.youchip.youmobile.controller.helpdesk.HelpDeskMainActivity;
-import com.youchip.youmobile.controller.settings.ConfigAccess;
-import com.youchip.youmobile.controller.txlog.TxLogger;
-import com.youchip.youmobile.controller.txlog.TxShopLogger;
-import com.youchip.youmobile.controller.txlog.TxType;
-import com.youchip.youmobile.model.shop.ShopItemConfig;
-import com.youchip.youmobile.model.shop.ShoppingCartItem;
-import com.youchip.youmobile.model.shop.ShoppingCart;
-import com.youchip.youmobile.utils.AlertBox;
-import com.youchip.youmobile.utils.DataConverter;
-import com.youchip.youmobile.view.shop.QuantityPickerDialog;
-import com.youchip.youmobile.view.shop.ShopItemAdapter;
-import com.youchip.youmobile.view.shop.ShopItemQuantatiyChangeAlert;
-import com.youchip.youmobile.view.shop.ShopItemValueChangeAlert;
-import com.youchip.youmobile.view.shop.ShoppingCartDialog;
-import com.youchip.youmobile.view.shop.ValuePickerDialog;
-
-import android.app.DialogFragment;
-import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +20,51 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.youchip.youmobile.R;
+import com.youchip.youmobile.controller.AbstractAppControlActivity;
+import com.youchip.youmobile.controller.helpdesk.HelpDeskMainActivity;
+import com.youchip.youmobile.controller.settings.ConfigAccess;
+import com.youchip.youmobile.controller.txlog.TxLogger;
+import com.youchip.youmobile.controller.txlog.TxShopLogger;
+import com.youchip.youmobile.controller.txlog.TxType;
+import com.youchip.youmobile.model.shop.ShopItemConfig;
+import com.youchip.youmobile.model.shop.ShoppingCart;
+import com.youchip.youmobile.model.shop.ShoppingCartItem;
+import com.youchip.youmobile.utils.AlertBox;
+import com.youchip.youmobile.utils.DataConverter;
+import com.youchip.youmobile.view.shop.QuantityPickerDialog;
+import com.youchip.youmobile.view.shop.ShopItemAdapter;
+import com.youchip.youmobile.view.shop.ShopItemQuantatiyChangeAlert;
+import com.youchip.youmobile.view.shop.ShopItemValueChangeAlert;
+import com.youchip.youmobile.view.shop.ShoppingCartDialog;
+import com.youchip.youmobile.view.shop.ValuePickerDialog;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Map;
+
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_BO_ROLE_ADMIN;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_BO_ROLE_EMPLOYEE;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_BO_ROLE_SUPERVISOR;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_FIELD_CREDIT1;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_FIELD_CREDIT2;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_FIELD_OLD_CREDIT1;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_FIELD_OLD_CREDIT2;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_KEY_A;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_MAX_CASHOUT;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_MAX_CREDIT_1;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_MAX_CREDIT_2;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_CHIP_USED_VOUCHER;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_EVENT_ID;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_MODE_NAME;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_SHOPPING_CART;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_SHOP_ERROR_ID;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_SHOP_PAYMENT_METHOD;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_SHOP_USE_VOUCHER;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_SHOW_BALANCE_ONLY;
+import static com.youchip.youmobile.controller.IntentExtrasKeys.INTENT_EXTRA_USER_ID;
 
 public class ShopMainActivity extends AbstractAppControlActivity implements ShopItemQuantatiyChangeAlert, ShopItemValueChangeAlert{
     private final String LOG_TAG =  ShopMainActivity.class.getName();
@@ -586,12 +605,12 @@ public class ShopMainActivity extends AbstractAppControlActivity implements Shop
 
 
                 // log to tmplog
-                txLogger.addToTempLog(item.getTxType(), TxLogger.NO_UID, totalPerItem, 0, 0, pamentMethod, item.getPlu(), item.getQuantity());
+                txLogger.addToTempLog(item.getTxType(), TxLogger.NO_UID, totalPerItem, 0, 0, pamentMethod, item.getPlu(), item.getQuantity(), item.getVat(), item.getTitle(), item.getPrice());
             }
 
             // persist log
             Log.d(LOG_TAG, "Trade was successful with cash");
-            txLogger.saveLog();
+            txLogger.saveLog(this);
             // clear log file
             txLogger.clearLog();
 
@@ -767,7 +786,6 @@ public class ShopMainActivity extends AbstractAppControlActivity implements Shop
                     ShopMainActivity.this.getResources().getString(R.string.hint_rfid_credit_1) + ": " + DataConverter.longToCurrency(lastingCredit1) + " " + currencySymbol + "\n" + 
                     ShopMainActivity.this.getResources().getString(R.string.hint_rfid_credit_2) + ": " + DataConverter.longToCurrency(lastingCredit2) + " " + currencySymbol2;
         }
-
         AlertBox.allertOnWarning(ShopMainActivity.this, R.string.hint_shopping_failed, message);
     }
 
@@ -797,7 +815,7 @@ public class ShopMainActivity extends AbstractAppControlActivity implements Shop
      * After confirming a purchase, this is the reaction on a negative chip-reader-interaction 
      * (aborting the process, or insufficient credits)
      */
-    private void onCRCError() {        
+    private void onCRCError() {
         AlertBox.allertOnWarning(ShopMainActivity.this, R.string.hint_shopping_failed, R.string.hint_chip_invalid_crc);
     }
     
@@ -951,7 +969,7 @@ public class ShopMainActivity extends AbstractAppControlActivity implements Shop
         case CAUSE_CANCELATION:
             return R.string.hint_shopping_cancelation_not_possible;
         case CAUSE_UNKNOWN:
-            return R.string.hint_shopping_failed;            
+            return R.string.hint_shopping_failed;
         default:
             return R.string.hint_shopping_failed;
         }

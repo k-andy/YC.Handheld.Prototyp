@@ -1,16 +1,15 @@
 package com.youchip.youmobile.model.network.response;
 
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import com.youchip.youmobile.controller.network.serviceInterface.SOAPResponse;
+import com.youchip.youmobile.controller.txlog.TxType;
+import com.youchip.youmobile.model.shop.ShopItemConfig;
 
 import org.ksoap2.serialization.SoapObject;
 
-import com.youchip.youmobile.controller.network.serviceInterface.SOAPResponse;
-import com.youchip.youmobile.model.shop.ShopItemConfig;
-import com.youchip.youmobile.controller.txlog.TxType;
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 /**
  * This class represents the answer of the shop config soap service
  * @author muelleco
@@ -39,6 +38,7 @@ public class ShopConfigSOAPResponse implements SOAPResponse, Serializable{
                 SoapObject soapGateConfig = (SoapObject) response.getProperty(i);
                 ShopItemConfig shopItemConfig = new ShopItemConfig();
 
+                shopItemConfig.setVat(Double.parseDouble(soapGateConfig.getPrimitivePropertyAsString(ShopConfigFields.VATType.toString())));
                 shopItemConfig.setPlu(Long.parseLong(soapGateConfig.getPrimitivePropertyAsString(ShopConfigFields.PLU.toString())));
                 shopItemConfig.setTitle(soapGateConfig.getPrimitivePropertyAsString(ShopConfigFields.Titel.toString()));
                 shopItemConfig.setPrice(Math.abs(Long.parseLong(soapGateConfig.getPrimitivePropertyAsString(ShopConfigFields.Price.toString()))));
@@ -64,7 +64,6 @@ public class ShopConfigSOAPResponse implements SOAPResponse, Serializable{
             throw new RuntimeException("Invalid shop config received!");
         }
     }
-
 
     private long getProductGroup(SoapObject soapGateConfig){
         long productGroup = 0;

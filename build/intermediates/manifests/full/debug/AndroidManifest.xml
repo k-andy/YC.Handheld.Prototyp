@@ -16,6 +16,11 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -93,6 +98,14 @@
         <activity
             android:name="com.youchip.youmobile.controller.ticket.CheckTicketActivity"
             android:label="@string/title_activity_check_ticket" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.controller.report.ReportActivity"
+            android:label="@string/title_activity_report" >
+        </activity>
+        <activity
+            android:name="com.youchip.youmobile.ReportDetails"
+            android:label="@string/title_activity_report_details" >
         </activity>
     </application>
 
